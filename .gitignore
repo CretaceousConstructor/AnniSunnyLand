@@ -17,13 +17,11 @@ cmake-build-*/
 
 # vcpkg
 vcpkg_installed/
-vcpkg/installed/
-vcpkg/buildtrees/
-vcpkg/packages/
-vcpkg/downloads/
+vcpkg/
 
-vcpkg/vcpkg.exe
-vcpkg/vcpkg
+# third_party
+third_party/
+
 
 # msc
 .clang-tidy
