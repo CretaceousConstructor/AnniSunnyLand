@@ -1,6 +1,13 @@
 # 标题
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.14)
+
+
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" 
+    CACHE STRING "Vcpkg toolchain file")
+
+
 project(SunnyLand VERSION 0.1.0 LANGUAGES C CXX)
+
 
 # 设置C++标准
 set(CMAKE_CXX_STANDARD 20)
@@ -14,20 +21,24 @@ else()
 endif()
 
 # 设置编译输出目录
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/bin)
 
 set(TARGET ${PROJECT_NAME}-${CMAKE_SYSTEM_NAME})
 
 # 查找并载入Cmake预设
-find_package(SDL3 REQUIRED)
-find_package(SDL3_image REQUIRED)
-find_package(SDL3_mixer REQUIRED)
-find_package(SDL3_ttf REQUIRED)
-find_package(glm REQUIRED)
-find_package(nlohmann_json REQUIRED)
-find_package(spdlog REQUIRED)
+find_package(SDL3 CONFIG REQUIRED)
+find_package(SDL3_image CONFIG REQUIRED)
+#find_package(SDL3_mixer CONFIG REQUIRED)
+find_package(SDL3_ttf CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
+
+
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/SDL_mixer EXCLUDE_FROM_ALL)
 # 添加可执行文件
 add_executable(${TARGET} main.cpp)
 

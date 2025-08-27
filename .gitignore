@@ -15,6 +15,16 @@ cmake-build-*/
 *-darwin
 *-Darwin
 
+# vcpkg
+vcpkg_installed/
+vcpkg/installed/
+vcpkg/buildtrees/
+vcpkg/packages/
+vcpkg/downloads/
+
+vcpkg/vcpkg.exe
+vcpkg/vcpkg
+
 # msc
 .clang-tidy
 
