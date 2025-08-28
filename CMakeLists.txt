@@ -1,10 +1,15 @@
 # 标题
 cmake_minimum_required(VERSION 3.14)
 
-
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" 
     CACHE STRING "Vcpkg toolchain file")
+#set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/third_party"
+    #CACHE STRING "Final install location")
 
+set(VCPKG_INSTALLED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/installed"
+    CACHE STRING "Vcpkg installed dir")
+
+    
 
 project(SunnyLand VERSION 0.1.0 LANGUAGES C CXX)
 
@@ -36,8 +41,6 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
 
-
-
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/SDL_mixer EXCLUDE_FROM_ALL)
 # 添加可执行文件
 add_executable(${TARGET} main.cpp)
@@ -51,4 +54,4 @@ target_link_libraries(${TARGET}
                         glm::glm
                         nlohmann_json::nlohmann_json
                         spdlog::spdlog
-                        )
+                    )
