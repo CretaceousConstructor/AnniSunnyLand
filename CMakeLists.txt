@@ -8,7 +8,6 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems
 
 set(VCPKG_INSTALLED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/installed"
     CACHE STRING "Vcpkg installed dir")
-
     
 
 project(SunnyLand VERSION 0.1.0 LANGUAGES C CXX)
@@ -42,12 +41,19 @@ find_package(spdlog CONFIG REQUIRED)
 
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/SDL_mixer EXCLUDE_FROM_ALL)
+
+
+file(GLOB_RECURSE FILE_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
+)
+
+
 # 添加可执行文件
-add_executable(${TARGET} 
-                src/main.cpp
-                src/engine/core/game_app.cpp
-                src/engine/core/time.cpp
-                )
+add_executable(${TARGET} ${FILE_SOURCES})
+
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/src" FILES ${FILE_SOURCES})
+
 
 # 链接库
 target_link_libraries(${TARGET}
